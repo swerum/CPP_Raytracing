@@ -1,0 +1,3 @@
+/Users/sarahwerum/Documents/CPP_Raytracing/build/CMakeFiles/Raytracing.dir
+/Users/sarahwerum/Documents/CPP_Raytracing/build/CMakeFiles/edit_cache.dir
+/Users/sarahwerum/Documents/CPP_Raytracing/build/CMakeFiles/rebuild_cache.dir
