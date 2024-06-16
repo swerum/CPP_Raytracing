@@ -856,4 +856,5 @@ CMakeFiles/Raytracing.dir/src/Raytracing/main.cc.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/array \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__memory/temp_value.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/sphere.h
+  /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/sphere.h \
+  /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/camera.h

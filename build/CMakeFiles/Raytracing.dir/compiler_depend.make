@@ -855,6 +855,7 @@ CMakeFiles/Raytracing.dir/src/Raytracing/main.cc.o: /Users/sarahwerum/Documents/
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable_list.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/project_utils.h \
+  /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/range.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/ray.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/sphere.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/vec3.h
@@ -2489,6 +2490,8 @@ CMakeFiles/Raytracing.dir/src/Raytracing/main.cc.o: /Users/sarahwerum/Documents/
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/in_in_result.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__algorithm/equal_range.h:
+
+/Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/range.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/malloc/_malloc.h:
 
