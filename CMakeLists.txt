@@ -24,6 +24,8 @@ set ( SOURCE_ONE_WEEKEND
   src/Raytracing/vec3.h
   src/Raytracing/color.h
   src/Raytracing/ray.h
+  src/Raytracing/hittable.h
+  src/Raytracing/sphere.h
 )
 
 include_directories(src)
