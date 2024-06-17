@@ -12,6 +12,11 @@ class camera {
         int image_width = 100; // Rendered image width in pixel count
         int samples_per_pixel = 1;
         double max_depth = 10;
+        double vertical_fov = 90; /** Vertical field of view */
+        /** Variables defining the Transform (location, rotation) */
+        point3 position; /** Where is the camera in scene space */
+        point3 viewport_position; /** Where is the camera looking and how large is the focal length */
+        vec3 up; /** what is up for the camera. Affects rotation of the scene */
 
         /* Public Camera Parameters Here */
         void render(const hittable& world) {
@@ -35,6 +40,7 @@ class camera {
         vec3 pixel_width_vector;
         vec3 pixel_height_vector;
         vec3 camera_center;
+        vec3 local_x_direction,local_y_direction,local_z_direction; /** local coordinate system unit vectors */
 
         /** Set all the private camera variables */
         void initialize() {
@@ -42,22 +48,30 @@ class camera {
             image_height = int(image_width / aspect_ratio);
             image_height = (image_height < 1) ? 1 : image_height;
 
-            // Camera
-            auto focal_length = 1.0;
-            auto viewport_height = 2.0;
+            /**focal length is defined by viewport_position (in book: lookat)*/
+            auto focal_length = (position - viewport_position).length();
+            /** 
+             * We use the focal length and vertical FOV to calculate the viewport height. 
+             * We use the viewport height and image's aspect ratio to set the viewport width
+            */
+            auto vfov_radians = degrees_to_radians(vertical_fov);
+            auto viewport_height = tan(vfov_radians / 2) * 2.0 * focal_length;
             auto viewport_width = viewport_height * (double(image_width)/image_height);
-            camera_center = point3(0, 0, 0);
+            camera_center = position;
 
-            // define u and v: the vectors with the direction and length of the viewport axes
-            auto viewport_width_vector = vec3(viewport_width, 0, 0);
-            auto viewport_heigth_vector = vec3(0, -viewport_height, 0);
+            // Calculate the local_x_direction,local_y_direction,local_z_direction unit basis vectors for the camera coordinate frame.
+            local_z_direction = unit_vector(position - viewport_position);
+            local_x_direction = unit_vector(cross(up, local_z_direction));
+            local_y_direction = cross(local_z_direction, local_x_direction);
 
             // Calculate the horizontal and vertical delta vectors from pixel to pixel.
+            auto viewport_width_vector = viewport_width * local_x_direction;
+            auto viewport_heigth_vector = -viewport_height * local_y_direction;
             pixel_width_vector = viewport_width_vector / image_width;
             pixel_height_vector = viewport_heigth_vector / image_height;
 
             // Calculate the location of the upper left pixel.
-            auto viewport_upper_left = camera_center - vec3(0, 0, focal_length) - viewport_width_vector/2 - viewport_heigth_vector/2;
+            auto viewport_upper_left = camera_center - focal_length * local_z_direction - viewport_width_vector/2 - viewport_heigth_vector/2;
             pixel00_loc = viewport_upper_left + 0.5 * (pixel_width_vector + pixel_height_vector);
         }
 
