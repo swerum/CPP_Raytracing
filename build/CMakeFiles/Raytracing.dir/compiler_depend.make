@@ -855,6 +855,7 @@ CMakeFiles/Raytracing.dir/src/Raytracing/main.cc.o: /Users/sarahwerum/Documents/
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/color.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable_list.h \
+  /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/material.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/project_utils.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/range.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/ray.h \
@@ -865,6 +866,8 @@ CMakeFiles/Raytracing.dir/src/Raytracing/main.cc.o: /Users/sarahwerum/Documents/
 /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/sphere.h:
 
 /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/project_utils.h:
+
+/Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/material.h:
 
 /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable_list.h:
 

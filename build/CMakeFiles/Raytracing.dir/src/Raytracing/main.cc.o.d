@@ -1,5 +1,6 @@
 CMakeFiles/Raytracing.dir/src/Raytracing/main.cc.o: \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/main.cc \
+  /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/material.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/project_utils.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/cmath \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__assert \
@@ -828,8 +829,8 @@ CMakeFiles/Raytracing.dir/src/Raytracing/main.cc.o: \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/vec3.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/range.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/ray.h \
-  /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable_list.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable.h \
+  /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable_list.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/vector \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__format/formatter.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/__format/format_fwd.h \

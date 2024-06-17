@@ -1,11 +1,13 @@
 #ifndef SPHERE_H
 #define SPHERE_H
+
 #include "hittable.h"
 #include "project_utils.h"
 
 class sphere : public hittable {
     public:
-        sphere(const point3& center, double radius) : center(center), radius(fmax(0,radius)) {}
+        sphere(const point3& center, double radius, shared_ptr<material> mat)
+            : center(center), radius(fmax(0,radius)), mat(mat) {}
         
         /**if the ray hits this sphere, set rec with this hit and return true */
         bool hits(const ray& r, range range, hit_details& rec) const override {
@@ -34,6 +36,7 @@ class sphere : public hittable {
             //set rec 
             rec.t = t;
             rec.p = r.at(t);
+            rec.mat = mat;
             auto outward_normal = (rec.p - center) / radius;
             rec.set_face_normal(r, outward_normal);
             return true;
@@ -41,5 +44,6 @@ class sphere : public hittable {
     private:
         point3 center;
         double radius;
+        shared_ptr<material> mat;
 };
 #endif

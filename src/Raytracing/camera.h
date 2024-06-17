@@ -3,6 +3,7 @@
 
 #include "project_utils.h"
 #include "hittable.h"
+#include "material.h"
 
 
 class camera {
@@ -89,20 +90,18 @@ class camera {
             range ray_range = range(0.001, infinity); 
             bool hit_something = world.hits(r, ray_range, hit);
             if (hit_something) {
-                /**
-                 * The hit normal is added to the random direction, so that the scattered light ray
-                 * is more likely to be scattered around the surface normal than in any direction --> Lambertian Diffuse
-                 */
-                auto direction = hit.normal + random_on_hemisphere(hit.normal);
-                auto col = 0.5 * ray_color(ray(hit.p, direction), world, depth-1);
-                return col;
+                ray outgoing_ray;
+                color attenuation;
+                if (hit.mat->scatter(r, hit, attenuation, outgoing_ray)) {
+                    return attenuation * ray_color(outgoing_ray, world, depth-1);
+                }
+                return color(0,0,0);
             }
 
             //add sky gradient
             auto white = color(1,1,1);
             auto blue = color(0.5, 0.7, 1.0);
-            auto dir = r.direction(); //
-            dir = dir.normalize();
+            auto dir = unit_vector(r.direction());
             auto y = (dir.y() +1)/2;
             return (1-y) * white + y * blue;
         }

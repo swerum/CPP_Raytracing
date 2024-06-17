@@ -2,6 +2,7 @@
 #define HITTABLE_H
 
 #include "project_utils.h"
+class material; //forward declaration
 
 class hit_details {
     public:
@@ -9,6 +10,8 @@ class hit_details {
         vec3 normal;
         double t;
         bool front_face;
+        shared_ptr<material> mat;
+
         void set_face_normal(const ray& r, const vec3& outward_normal) {
             // Sets the hit record normal vector.
             // NOTE: the parameter `outward_normal` is assumed to have unit length.

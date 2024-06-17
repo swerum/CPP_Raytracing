@@ -19,14 +19,20 @@ class hittable_list : public hittable {
         }
 
         //check if a ray hits anything in the list of objects
-        bool hits(const ray& r, range range, hit_details& hit) const override {
+        bool hits(const ray& r, range ray_range, hit_details& hit) const override {
+            double closest_t = ray_range.max;
+            hit_details closest_hit;
+            bool hit_anything = false;
+
             for (int i = 0; i < objects.size(); i++) {
                 auto obj = objects[i];
-                if (obj->hits(r, range, hit)) {
-                    return true;
+                if (obj->hits(r, range(ray_range.min, closest_t), closest_hit)) {
+                    hit_anything = true;
+                    closest_t = closest_hit.t;
+                    hit = closest_hit;
                 }
             }
-            return false;
+            return hit_anything;
         }
 };
 
