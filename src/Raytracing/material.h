@@ -77,14 +77,32 @@ class dielectric : public material {
     private:
         double refractive_index;
 
-        /** 
-         * MATH: there are cases when Snell's Law fails, because it returns a refractive angle greater than 90 degrees
-         * Since that doesn't make any sense, that means that it literally cannot refract
-         */
-        bool can_refract(vec3 unit_incoming_ray, vec3 normal, double relative_ri) const {
+       
+        static bool can_refract(vec3 unit_incoming_ray, vec3 normal, double relative_ri) {
+             /** 
+             * MATH: there are cases when Snell's Law fails, because it returns a refractive angle greater than 90 degrees
+             * Since that doesn't make any sense, that means that it literally cannot refract
+             */
             double cos_theta = fmin(dot(-unit_incoming_ray, normal), 1.0);
             double sin_theta = sqrt(1.0 - cos_theta*cos_theta);
-            return relative_ri * sin_theta <= 1.0;
+            bool cannot_refract = relative_ri * sin_theta > 1.0;
+            if (cannot_refract) return false;
+            /** Check for Schlick reflectance */
+            bool schlick_refracts = schlick_reflectance(cos_theta, relative_ri) <= random_double();
+            return schlick_refracts;
+        }
+
+        /** 
+         * MATH: Returns a value between 0 and 1 depending on the angle of incidence
+         * If the angle of incidence is shallow, it returns a high value. 
+         * If the reflectance is lower than a random double, it refracts. If it is higher, it reflects
+         */
+        static double schlick_reflectance(double cosine, double refraction_index) {
+            // Use Schlick's approximation for reflectance.
+            auto r0 = (1 - refraction_index) / (1 + refraction_index);
+            r0 = r0*r0;
+            double reflectance = r0 + (1-r0)*pow((1 - cosine),5);
+            return reflectance;
         }
 
 };
