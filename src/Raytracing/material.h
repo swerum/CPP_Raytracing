@@ -54,4 +54,39 @@ class metal : public material {
         color albedo;
         double fuzz;
 };
+
+class dielectric : public material {
+    public:
+        dielectric(double refractive_index) : refractive_index(refractive_index) {}
+        bool scatter(const ray& r_in, const hit_details& hit, color& attenuation, ray& scattered) const override {
+            double relative_ri = hit.front_face ? 1.0/refractive_index : refractive_index;
+            vec3 unit_incoming_direction = unit_vector(r_in.direction());
+
+            /** If we can't refract, then we reflect the ray instead */
+            vec3 outgoing_direction;
+            if (can_refract(unit_incoming_direction, hit.normal, relative_ri)) {
+                outgoing_direction = refract(unit_incoming_direction, hit.normal, relative_ri);
+            } else {
+                outgoing_direction = reflect(unit_incoming_direction, hit.normal);
+            }
+            scattered = ray(hit.p, outgoing_direction);
+            attenuation = color(1,1,1);
+            return true;
+        }
+
+    private:
+        double refractive_index;
+
+        /** 
+         * MATH: there are cases when Snell's Law fails, because it returns a refractive angle greater than 90 degrees
+         * Since that doesn't make any sense, that means that it literally cannot refract
+         */
+        bool can_refract(vec3 unit_incoming_ray, vec3 normal, double relative_ri) const {
+            double cos_theta = fmin(dot(-unit_incoming_ray, normal), 1.0);
+            double sin_theta = sqrt(1.0 - cos_theta*cos_theta);
+            return relative_ri * sin_theta <= 1.0;
+        }
+
+};
+
 #endif
