@@ -20,8 +20,12 @@ class sphere : public hittable {
             auto sqrtd = sqrt(discriminant);
             auto t = (h - sqrtd) / a;
 
-            // check that t is within the (min_t, max_t) range  
-            if (!range.contains(t)) {
+            /**
+             * check that t is within the (min_t, max_t) range  
+             * IMPORTANT: t must be LARGER than 0. if you allow for zero, it doesn't bounce off geometry, 
+             * but just sticks to its geometry and causes and endless loop
+             */
+            if (!range.surrounds(t)) {
                 t = (h + sqrtd) / a;
                 if (!range.contains(t))
                     return false;

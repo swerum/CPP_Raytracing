@@ -6,7 +6,7 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/Users/sarahwerum/Documents/CPP_Raytracing/src
 
-CXX_FLAGSarm64 = -std=c++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wnon-virtual-dtor -Wreorder -Wsometimes-uninitialized -Wunused-variable
+CXX_FLAGSarm64 = -g -std=c++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wnon-virtual-dtor -Wreorder -Wsometimes-uninitialized -Wunused-variable
 
-CXX_FLAGS = -std=c++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wnon-virtual-dtor -Wreorder -Wsometimes-uninitialized -Wunused-variable
+CXX_FLAGS = -g -std=c++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wnon-virtual-dtor -Wreorder -Wsometimes-uninitialized -Wunused-variable
 

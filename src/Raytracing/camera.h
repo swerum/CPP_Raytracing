@@ -10,6 +10,7 @@ class camera {
         double aspect_ratio = 1.0; // Ratio of image width over height
         int image_width = 100; // Rendered image width in pixel count
         int samples_per_pixel = 1;
+        double max_depth = 10;
 
         /* Public Camera Parameters Here */
         void render(const hittable& world) {
@@ -61,25 +62,39 @@ class camera {
 
         color get_pixel_color(int x, int y, const hittable& world) {
             color pixel_color = color(0,0,0);
+            /**Anti-aliasing: we slightly randomize the starting position within the pixel
+             *  and take the average of all the colors we get back */
             for (int i = 0; i < samples_per_pixel; i++)
             {
                 auto pixel_center = pixel00_loc + (x * pixel_width_vector) + (y * pixel_height_vector);
                 auto sample_point = pixel_center + random_double(-0.5, 0.5) * pixel_width_vector + random_double(-0.5, 0.5) * pixel_height_vector;
                 auto ray_direction = sample_point - camera_center;
                 ray r(camera_center, ray_direction) ;
-                pixel_color += ray_color(r, world);
+                pixel_color += ray_color(r, world, max_depth);
             }
             pixel_color /= samples_per_pixel;
             return pixel_color;
         }
         
         /** iterate over world objects and display normal as color. if no hit, display blue-white gradient background */
-        color ray_color(const ray& r, const hittable& world) const {
+        color ray_color(const ray& r, const hittable& world, double depth) const {
+            if (depth <= 0) return color(0,0,0);
+
             hit_details hit;
-            range ray_range = range(0, infinity);
+            /**
+             * Warning: Shadow Acne 
+             * if min is zero, we might hit the same geometry again by accident due to rounding errors 
+             * This makes the geometry darker and have weird bright spots
+             * */
+            range ray_range = range(0.001, infinity); 
             bool hit_something = world.hits(r, ray_range, hit);
             if (hit_something) {
-                auto col = (color(1,1,1)+hit.normal) / 2.0;
+                /**
+                 * The hit normal is added to the random direction, so that the scattered light ray
+                 * is more likely to be scattered around the surface normal than in any direction --> Lambertian Diffuse
+                 */
+                auto direction = hit.normal + random_on_hemisphere(hit.normal);
+                auto col = 0.5 * ray_color(ray(hit.p, direction), world, depth-1);
                 return col;
             }
 

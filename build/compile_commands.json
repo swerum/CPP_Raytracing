@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/sarahwerum/Documents/CPP_Raytracing/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/sarahwerum/Documents/CPP_Raytracing/src -g -std=c++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wnon-virtual-dtor -Wreorder -Wsometimes-uninitialized -Wunused-variable -o CMakeFiles/Raytracing.dir/src/Raytracing/main.cc.o -c /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/main.cc",
+  "file": "/Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/main.cc",
+  "output": "CMakeFiles/Raytracing.dir/src/Raytracing/main.cc.o"
+}
+]

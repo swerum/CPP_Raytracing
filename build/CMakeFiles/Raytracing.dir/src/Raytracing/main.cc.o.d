@@ -826,8 +826,8 @@ CMakeFiles/Raytracing.dir/src/Raytracing/main.cc.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/cstdarg \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/color.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/vec3.h \
-  /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/ray.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/range.h \
+  /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/ray.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable_list.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/c++/v1/vector \
