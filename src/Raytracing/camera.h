@@ -9,6 +9,7 @@ class camera {
     public:
         double aspect_ratio = 1.0; // Ratio of image width over height
         int image_width = 100; // Rendered image width in pixel count
+        int samples_per_pixel = 1;
 
         /* Public Camera Parameters Here */
         void render(const hittable& world) {
@@ -19,10 +20,7 @@ class camera {
                 std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
                 for (int i = 0; i < image_width; i++) {
                     //every pixel color is defined by a ray going from the camera center to its pixel
-                    auto pixel_center = pixel00_loc + (i * pixel_delta_u) + (j * pixel_delta_v);
-                    auto ray_direction = pixel_center - camera_center;
-                    ray r(camera_center, ray_direction);
-                    color pixel_color = ray_color(r, world);
+                    color pixel_color = get_pixel_color(i,j, world);
                     write_color(std::cout, pixel_color);
                 }
             }
@@ -32,8 +30,8 @@ class camera {
         /* Private Camera Variables Here */
         int image_height;
         vec3 pixel00_loc;
-        vec3 pixel_delta_u;
-        vec3 pixel_delta_v;
+        vec3 pixel_width_vector;
+        vec3 pixel_height_vector;
         vec3 camera_center;
 
         /** Set all the private camera variables */
@@ -49,16 +47,30 @@ class camera {
             camera_center = point3(0, 0, 0);
 
             // define u and v: the vectors with the direction and length of the viewport axes
-            auto viewport_u = vec3(viewport_width, 0, 0);
-            auto viewport_v = vec3(0, -viewport_height, 0);
+            auto viewport_width_vector = vec3(viewport_width, 0, 0);
+            auto viewport_heigth_vector = vec3(0, -viewport_height, 0);
 
             // Calculate the horizontal and vertical delta vectors from pixel to pixel.
-            pixel_delta_u = viewport_u / image_width;
-            pixel_delta_v = viewport_v / image_height;
+            pixel_width_vector = viewport_width_vector / image_width;
+            pixel_height_vector = viewport_heigth_vector / image_height;
 
             // Calculate the location of the upper left pixel.
-            auto viewport_upper_left = camera_center - vec3(0, 0, focal_length) - viewport_u/2 - viewport_v/2;
-            pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
+            auto viewport_upper_left = camera_center - vec3(0, 0, focal_length) - viewport_width_vector/2 - viewport_heigth_vector/2;
+            pixel00_loc = viewport_upper_left + 0.5 * (pixel_width_vector + pixel_height_vector);
+        }
+
+        color get_pixel_color(int x, int y, const hittable& world) {
+            color pixel_color = color(0,0,0);
+            for (int i = 0; i < samples_per_pixel; i++)
+            {
+                auto pixel_center = pixel00_loc + (x * pixel_width_vector) + (y * pixel_height_vector);
+                auto sample_point = pixel_center + random_double(-0.5, 0.5) * pixel_width_vector + random_double(-0.5, 0.5) * pixel_height_vector;
+                auto ray_direction = sample_point - camera_center;
+                ray r(camera_center, ray_direction) ;
+                pixel_color += ray_color(r, world);
+            }
+            pixel_color /= samples_per_pixel;
+            return pixel_color;
         }
         
         /** iterate over world objects and display normal as color. if no hit, display blue-white gradient background */

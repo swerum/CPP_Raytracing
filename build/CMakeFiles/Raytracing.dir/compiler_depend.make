@@ -851,6 +851,7 @@ CMakeFiles/Raytracing.dir/src/Raytracing/main.cc.o: /Users/sarahwerum/Documents/
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
+  /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/camera.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/color.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable.h \
   /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable_list.h \
@@ -866,6 +867,8 @@ CMakeFiles/Raytracing.dir/src/Raytracing/main.cc.o: /Users/sarahwerum/Documents/
 /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/project_utils.h:
 
 /Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/hittable_list.h:
+
+/Users/sarahwerum/Documents/CPP_Raytracing/src/Raytracing/camera.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h:
 
