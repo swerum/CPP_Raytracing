@@ -1,6 +1,7 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
+#include <assert.h>
 #include "hittable.h"
 #include "project_utils.h"
 
@@ -38,6 +39,7 @@ class sphere : public hittable {
             rec.p = r.at(t);
             rec.mat = mat;
             auto outward_normal = (rec.p - center) / radius;
+            assert(outward_normal.length() > 0.99 && outward_normal.length() < 1.01);
             rec.set_face_normal(r, outward_normal);
             return true;
         }
