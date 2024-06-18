@@ -106,17 +106,30 @@ inline vec3 unit_vector(const vec3& v) {
     return v / v.length();
 }
 
-// inline vec3 random_in_unit_sphere() {
-//     while (true) {
-//         auto p = vec3::random(-1,1);
-//         if (p.length_squared() < 1)
-//             return p;
-//     }
-// }
+/** 
+ * The reason to discard vectors that are too long is that 
+ * if we don't, we won't get an even distribution of vectors. 
+ * We would be more likely to get a vector pointing towards the corners of our [-1,1] cube
+ * */
+inline vec3 random_in_unit_disk() {
+    while (true) {
+        auto p = vec3(random_double(-1,1), random_double(-1,1), 0);
+        if (p.length_squared() < 1)
+            return p;
+    }
+}
+
+inline vec3 random_in_unit_sphere() {
+    while (true) {
+        auto p = vec3::random(-1,1);
+        if (p.length_squared() < 1)
+            return p;
+    }
+}
+
 
 inline vec3 random_unit_vector() {
-    // return unit_vector(random_in_unit_sphere());
-    return unit_vector(vec3::random(-1,1));
+    return unit_vector(random_in_unit_sphere());
 }
 
 inline vec3 random_on_hemisphere(const vec3& normal) {
