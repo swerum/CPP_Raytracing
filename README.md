@@ -10,3 +10,7 @@ Tangents included
 Here is my own ray-traced rendition of the books cover image, here converted from a ppm to a png:
 
 ![final_render](https://github.com/swerum/CPP_Raytracing/assets/48184789/ec75502b-229d-4745-a99c-e10239b9d33c)
+
+To use, you can edit the world in `main.cc` and run with
+
+`cmake -B build ; cmake --build build; build/Raytracing > image.ppm`
